@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "description": "Organization-wide GitHub defaults and shared schemas for Backblaze Labs.",
+  "license": "MIT",
   "scripts": {
     "validate": "node scripts/validate-references.mjs"
   },

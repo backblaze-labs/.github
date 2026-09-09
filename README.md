@@ -1,6 +1,7 @@
 # `.github` — Backblaze Labs organization defaults
 
 [![Validate schemas](https://github.com/backblaze-labs/.github/actions/workflows/validate-schema.yml/badge.svg)](https://github.com/backblaze-labs/.github/actions/workflows/validate-schema.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Organization-wide GitHub configuration and shared standards for the
 [**Backblaze Labs**](https://github.com/backblaze-labs) org.
