@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/backblaze-labs/.github/main/schemas/references.schema.json
+#
+# Complete, valid example of a repo's references.yml.
+# Copy to the root of a repo as `references.yml` and edit for that project.
+# NOTE: quote dates in YAML ("2026-09-08") so they stay strings, not date objects.
+schema_version: 1
+project: Backblaze B2 MCP Server
+slug: b2-mcp
+updated: "2026-09-08"
+
+canonical:
+  repo: https://github.com/backblaze-labs/b2-mcp
+  package: "@backblaze-labs/b2-mcp"
+  registry_name: io.github.backblaze-labs/b2-mcp
+  container: ghcr.io/backblaze-labs/b2-mcp
+  homepage: https://backblaze-labs.github.io/b2-mcp/
+  display_name: Backblaze B2 MCP Server
+  backlink_anchor: Backblaze B2 MCP server
+
+references:
+  - id: launch-blog
+    title: Introducing the Backblaze B2 MCP Server
+    url: https://www.backblaze.com/blog/introducing-the-backblaze-b2-mcp-server/
+    type: blog
+    source: Backblaze Blog
+    official: true
+    published: "2026-09-10"
+    added: "2026-09-08"
+    status: live
+    tags: [announcement, launch]
+    summary: Company launch announcement for the B2 MCP server.
+
+  - id: npm
+    title: "@backblaze-labs/b2-mcp on npm"
+    url: https://www.npmjs.com/package/@backblaze-labs/b2-mcp
+    type: registry
+    source: npm
+    official: true
+    canonical_for: npm
+    added: "2026-09-08"
+    status: live
+
+  - id: mcp-registry
+    title: Official MCP Registry entry
+    url: https://registry.modelcontextprotocol.io/v0/servers?search=io.github.backblaze-labs/b2-mcp
+    type: registry
+    source: Official MCP Registry
+    canonical_for: mcp-registry
+    added: "2026-09-08"
+    status: live
+
+  - id: glama
+    title: b2-mcp on Glama
+    url: https://glama.ai/mcp/servers/@backblaze-labs/b2-mcp
+    type: registry
+    source: Glama
+    added: "2026-09-08"
+    status: live
+    metrics: { grade: A }
+
+  - id: lobehub
+    title: b2-mcp on LobeHub
+    url: https://lobehub.com/mcp/backblaze-labs-b2-mcp
+    type: registry
+    source: LobeHub
+    added: "2026-09-08"
+    status: live
+    metrics: { grade: A }

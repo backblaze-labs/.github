@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/backblaze-labs/.github/main/schemas/references.schema.json",
+  "title": "backblaze-labs references",
+  "description": "Org-wide standard for recording external references about a repository — blog posts, press, docs, videos, directory/registry listings, and related projects — in a single machine-parseable file (references.yml) at the repo root. Source of truth for internal tooling (Quality Keeper validation, dashboards). Human-readable rendering is optional and not part of this contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project", "slug", "updated", "references"],
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "description": "Contract version. Bumped only for breaking changes; v1 is never mutated."
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human display name of the project (e.g. \"Backblaze B2 MCP Server\")."
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "Repository name / stable identifier (e.g. \"b2-mcp\")."
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO-8601 date this file was last updated (YYYY-MM-DD)."
+    },
+    "canonical": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional canonical identity block — the \"use everywhere\" facts for backlinks and directory de-duplication.",
+      "properties": {
+        "repo": { "type": "string", "format": "uri" },
+        "homepage": { "type": "string", "format": "uri" },
+        "package": { "type": "string", "description": "Primary package coordinate, e.g. an npm or PyPI name." },
+        "registry_name": { "type": "string" },
+        "container": { "type": "string" },
+        "org": { "type": "string", "format": "uri" },
+        "board": { "type": "string", "format": "uri" },
+        "display_name": { "type": "string" },
+        "backlink_anchor": { "type": "string", "description": "Preferred anchor text for inbound links." }
+      }
+    },
+    "references": {
+      "type": "array",
+      "description": "Flat list of external references. Filter by `type`/`official`/`status` rather than nesting.",
+      "items": { "$ref": "#/definitions/reference" }
+    }
+  },
+  "definitions": {
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "url", "type", "added"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "description": "Stable, unique slug for this entry within the file."
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "type": {
+          "enum": [
+            "blog", "press", "docs", "video", "webinar", "podcast", "talk",
+            "tutorial", "case_study", "social", "award", "changelog",
+            "registry", "listing", "repo", "board", "issue", "dashboard",
+            "tool", "org", "sample"
+          ],
+          "description": "Kind of reference. Use `registry`/`listing` for directory presence, `blog`/`press` for articles, `repo`/`sample` for related code."
+        },
+        "source": {
+          "type": "string",
+          "description": "Publisher or platform (e.g. \"Backblaze Blog\", \"Glama\", \"LobeHub\", \"YouTube\")."
+        },
+        "official": {
+          "type": "boolean",
+          "description": "true if first-party (published by Backblaze); false/omitted for third-party."
+        },
+        "published": {
+          "type": "string",
+          "format": "date",
+          "description": "ISO-8601 publication date of the referenced item, when known."
+        },
+        "added": {
+          "type": "string",
+          "format": "date",
+          "description": "ISO-8601 date this entry was recorded."
+        },
+        "language": {
+          "type": "string",
+          "description": "BCP-47 language tag of the referenced item (default \"en\")."
+        },
+        "status": {
+          "enum": ["live", "dead", "paused", "archived"],
+          "description": "Link/listing health. Defaults to \"live\"; link-health tooling may set \"dead\"."
+        },
+        "canonical_for": {
+          "type": "string",
+          "description": "Marks this entry as THE canonical one for a channel (e.g. \"npm\", \"mcp-registry\"). At most one per channel."
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "summary": {
+          "type": "string",
+          "description": "One-line description of the reference."
+        },
+        "metrics": {
+          "type": "object",
+          "description": "Freeform, additive metrics for this reference (e.g. { grade: \"A\" }, { score: 89 }).",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}
